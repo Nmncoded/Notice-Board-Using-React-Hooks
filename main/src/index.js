@@ -53,7 +53,10 @@ const root = createRoot(container);
 } */
 function App(){
     let [text,setText] = useState("");
+    let [activIndex,setActivIndex] = useState(0);
+    let [changetxt,setChangetxt] = useState("");
     let [language,setLanguage] = useState("HTML");
+    let [isClicked,setIsClicked] = useState(false);
     let [dataArr,setDataArr] = useState(JSON.parse(localStorage.getItem("data")) ? JSON.parse(localStorage.getItem("data")) : []);
     const handleChange = ({target}) => {
         let {name,value} = target;
@@ -62,19 +65,39 @@ function App(){
             break;
             case "language" : setLanguage(language = value)
             break;
+            case "changetxt" : setChangetxt(changetxt = value)
+            break;
             default:
             break;
         }
         
     }
     useEffect = (() => {
+        console.log("useefct")
         localStorage.setItem("data",JSON.stringify(dataArr))
-    },[dataArr])
+    },[])
     const handleDelete = (id) => {
         // console.log(id) 
         setDataArr(
             dataArr.filter((p,index) => index !== id )
         )
+    }
+    const handleIsClicked = (id) => {
+        // console.log("isclicked")
+        setActivIndex(activIndex= id)
+        setIsClicked(!isClicked);
+    }
+    const handleUpdate = (id) => {
+        // console.log(id);
+        setDataArr(dataArr.map((p,index) => {
+            if(index === id){
+                p.text = changetxt ? changetxt : p.text;
+            }
+            return p;
+        }));
+        setIsClicked(!isClicked);
+        setActivIndex(activIndex= id);
+        setChangetxt(changetxt = "");
     }
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -88,7 +111,7 @@ function App(){
     return (
         <div className='body' >
             <Header />
-            <DisplayUI dataArr={dataArr} handleDelete={(index) => handleDelete(index)} />
+            <DisplayUI dataArr={dataArr} handleDelete={(index) => handleDelete(index)} handleIsClicked={ (index) => handleIsClicked(index)} activIndex={activIndex} handleChange={handleChange} handleUpdate={(index) => handleUpdate(index)} isClicked={isClicked} />
             <Footer handleChange={handleChange} handleSubmit={handleSubmit} text={text} language={language} />
         </div>
     )

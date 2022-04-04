@@ -51,7 +51,7 @@ table {
 
 .body {
     background-color: bisque;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -93,7 +93,9 @@ table {
     flex-direction: column;
     border-radius: 8px;
     border: 1px solid;
-    p {
+    p,input {
+        display: flex;
+        // justify-content: space-evenly;
         outline: 0;
         border: 0;
         background-color: rgba(orange, 0.8);
@@ -106,6 +108,12 @@ table {
         }
         padding: 8px;
         margin: 8px;
+        span {
+            border: 1px solid rgba(black,0.4);
+        }
+    }
+    input {
+        background-color: white;
     }
     span {
         cursor: pointer;

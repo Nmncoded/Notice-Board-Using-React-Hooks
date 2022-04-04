@@ -7,8 +7,8 @@ class DisplayUI extends React.Component {
     }
     
     render(){
-        console.log("displayui")
-        let {dataArr} = this.props;
+        let {dataArr,isClicked,changetxt,activIndex} = this.props;
+        console.log(isClicked)
         if(!dataArr.length){
             return null;
         }
@@ -22,8 +22,17 @@ class DisplayUI extends React.Component {
                                 <li key={index} className="li">
                                     <span onClick={() => this.props.handleDelete(index)} >X</span>
                                     <p className="category">{notice.language}</p>
-                                    <p>{notice.text}</p>
-                                    
+                                    {
+                                        isClicked && activIndex === index ? 
+                                        <input type='text' style={{color:"black"}} value={changetxt} name='changetxt' onChange={this.props.handleChange} /> 
+                                        :
+                                        <p >{notice.text} </p>
+                                    }
+                                    {
+                                        isClicked && activIndex === index ? 
+                                        <span   onClick={() => this.props.handleUpdate(index)}  >Update</span> : 
+                                        <span   onClick={ () =>  this.props.handleIsClicked(index)}  >Edit</span> 
+                                    }
                                 </li>
                             )
                         })
