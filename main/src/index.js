@@ -72,10 +72,11 @@ function App(){
         }
         
     }
-    useEffect = (() => {
-        console.log("useefct")
-        localStorage.setItem("data",JSON.stringify(dataArr))
-    },[])
+    useEffect(() => {
+        console.log("useefct");
+        localStorage.setItem("data",JSON.stringify(dataArr));
+
+    },[dataArr])
     const handleDelete = (id) => {
         // console.log(id) 
         setDataArr(
@@ -103,7 +104,7 @@ function App(){
         event.preventDefault();
         console.log("submit")
         // let {dataArr,text,language} = this.state;
-        setDataArr(dataArr.concat({text,language}));
+        setDataArr([...dataArr.concat({text,language})]);
         setText(text = "")
         setLanguage(language = "")
         

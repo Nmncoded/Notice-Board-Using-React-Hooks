@@ -8,7 +8,7 @@ class DisplayUI extends React.Component {
     
     render(){
         let {dataArr,isClicked,changetxt,activIndex} = this.props;
-        console.log(isClicked)
+        // console.log(isClicked)
         if(!dataArr.length){
             return null;
         }
